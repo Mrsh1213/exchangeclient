@@ -1,0 +1,68 @@
+@font-face {
+    font-family: IranSansMedium;
+    src: url('../fonts/iran-sans/IRANSansWeb_Medium.eot') ;
+    src: url('../fonts/iran-sans/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/iran-sans/IRANSansWeb_Medium.woff') format('woff'),
+    url('../fonts/iran-sans/IRANSansWeb_Medium.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: IranSans;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/iran-sans/IRANSansWeb.eot');
+    src: url('../fonts/iran-sans/IRANSansWeb.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/iran-sans/IRANSansWeb.woff2') format('woff2'),
+    url('../fonts/iran-sans/IRANSansWeb.woff') format('woff'),
+    url('../fonts/iran-sans/IRANSansWeb.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: IranSansFaNum;
+    src: url('../fonts/iran-sans/IRANSansWeb(FaNum).eot') ;
+    src: url('../fonts/iran-sans/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),
+    url('../fonts/iran-sans/IRANSansWeb(FaNum).woff') format('woff'),
+    url('../fonts/iran-sans/IRANSansWeb(FaNum).ttf') format('truetype');
+    font-weight: normal;
+}
+
+
+@font-face {
+    font-family: UbuntuLight;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/ubuntu/Ubuntu-Light.ttf');
+    src: url('../fonts/ubuntu/Ubuntu-Light.ttf?#iefix') format('embedded-opentype'),
+    url('../fonts/ubuntu/Ubuntu-Light.ttf') format('woff2'),
+    url('../fonts/ubuntu/Ubuntu-Light.ttf') format('woff'),
+    url('../fonts/ubuntu/Ubuntu-Light.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: UbuntuBold;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+    src: url('../fonts/ubuntu/Ubuntu-Bold.ttf?#iefix') format('embedded-opentype'),
+    url('../fonts/ubuntu/Ubuntu-Bold.ttf') format('woff2'),
+    url('../fonts/ubuntu/Ubuntu-Bold.ttf') format('woff'),
+    url('../fonts/ubuntu/Ubuntu-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: UbuntuRegular;
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+    src: url('../fonts/ubuntu/Ubuntu-Regular.ttf?#iefix') format('embedded-opentype'),
+    url('../fonts/ubuntu/Ubuntu-Regular.ttf') format('woff2'),
+    url('../fonts/ubuntu/Ubuntu-Regular.ttf') format('woff'),
+    url('../fonts/ubuntu/Ubuntu-Regular.ttf') format('truetype');
+}
+
+#root, body, html, #subRoot {
+    height: 100%;
+    margin: 0;
+    color: #fff
+}
