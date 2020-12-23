@@ -5,6 +5,7 @@
 
 /package-lock.json
 /.idea
+/.eslintcache
 # testing
 /coverage
 
