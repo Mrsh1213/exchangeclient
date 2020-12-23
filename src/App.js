@@ -26,85 +26,33 @@ const App = () => {
     const dispatch = useDispatch();
 
     return (
-        < ThemeProvider
-    theme = {theme(themeType, lang)} >
-        {/* <Button variant={"outlined"} color={"primary"} onClick={() => {
+        <ThemeProvider theme={theme(themeType, lang)}>
+            {/* <Button variant={"outlined"} color={"primary"} onClick={() => {
                 dispatch(changeLanguage({lang: lang === "en" ? "fa" : "en"}));
-            }}>Change language {lang}</Button>*/
-        }
-    {
-        lang === "fa" ?
-    <
-        StylesProvider
-        jss = {jss} >
-            < div
-        id = "subRoot"
-        dir = {"rtl"} >
-            < Router >
-            < Route
-        exact
-        path = "/"
-        component = {Home}
-        />
-        < Route
-        path = "/results"
-        component = {Results}
-        />
-        < Route
-        path = "/movie/:movieId"
-        component = {MovieDetail}
-        />
-        < Route
-        path = "/login"
-        component = {Login}
-        />
-        < Route
-        path = "/register"
-        component = {Register}
-        />
-        < Route
-        path = "/restore"
-        component = {Restore}
-        />
-        < Route
-        path = "/dashboard"
-        component = {DashboardRoute}
-        />
-        < /Router>
-        < /div>
-        < /StylesProvider> :
-        < Router >
-        < Route
-        exact
-        path = "/"
-        component = {Home}
-        />
-        < Route
-        path = "/results"
-        component = {Results}
-        />
-        < Route
-        path = "/movie/:movieId"
-        component = {MovieDetail}
-        />
-        < Route
-        path = "/login"
-        component = {Login}
-        />
-        < Route
-        path = "/register"
-        component = {Register}
-        />
-        < Route
-        path = "/restore"
-        component = {Restore}
-        />
-        < Route
-        path = "/dashboard"
-        component = {DashboardRoute}
-        />
-        < /Router>}
-        < /ThemeProvider>
+            }}>Change language {lang}</Button>*/}
+            {lang === "fa" ? <StylesProvider jss={jss}>
+                    <div id="subRoot" dir={"rtl"}>
+                        <Router>
+                            <Route exact path="/" component={Home}/>
+                            <Route path="/results" component={Results}/>
+                            <Route path="/movie/:movieId" component={MovieDetail}/>
+                            <Route path="/login" component={Login}/>
+                            <Route path="/register" component={Register}/>
+                            <Route path="/restore" component={Restore}/>
+                            <Route path="/dashboard" component={DashboardRoute}/>
+                        </Router>
+                    </div>
+                </StylesProvider> :
+                <Router>
+                    <Route exact path="/" component={Home}/>
+                    <Route path="/results" component={Results}/>
+                    <Route path="/movie/:movieId" component={MovieDetail}/>
+                    <Route path="/login" component={Login}/>
+                    <Route path="/register" component={Register}/>
+                    <Route path="/restore" component={Restore}/>
+                    <Route path="/dashboard" component={DashboardRoute}/>
+                </Router>}
+        </ThemeProvider>
     )
 }
 

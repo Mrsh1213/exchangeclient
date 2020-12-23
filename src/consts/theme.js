@@ -25,11 +25,12 @@ const theme = (type, lang) => {
                     contrastText: "#fff"
                 },
                 secondary: {
-                    main: "#2684fe",
-                    dark: "#2684fe",
+                    main: "#00a275",
+                    dark: "#00a275",
+                    light: "#ff1e8c",
                 },
                 primary: {
-                    main: "#6c7983",
+                    main: "#ff1e8c",
                     dark: "#6c7983",
                     light: "#524df6",
                     contrastText: "#fff"
@@ -41,7 +42,10 @@ const theme = (type, lang) => {
                 background: {
                     paper: type === "dark" ? "#26313a" : "#fff"
                 },
-                text: {},
+                text: {
+                    primary: "#fff",
+                    secondary: "#00a275"
+                },
                 color: {
                     text1: {
                         light: "#151d24",

@@ -5,10 +5,8 @@ Setting.propTypes = {};
 
 function Setting(props) {
     return (
-        < div > Setting
-    Profile < /div>
-)
-    ;
+        <div>Setting Profile</div>
+    );
 }
 
 export default Setting;

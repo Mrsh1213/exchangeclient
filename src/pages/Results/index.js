@@ -26,40 +26,22 @@ export default ({history, location}) => {
 
     const renderMovies = () => {
         if (movies) {
-            return movies.map((value, index) => ( < MovieResult
-            key = {index}
-            {...
-                value
-            }
-            />));
+            return movies.map((value, index) => (<MovieResult key={index} {...value}/>));
         } else if (!isLoading) {
             return (
-                < div
-            className = {classes.noResultsContainer} >
-                < Typography
-            className = {classes.noResultsText} > No
-            existen
-            resultados < /Typography>
-            < Button
-            variant = "contained"
-            color = "primary"
-            onClick = {handleGoToHomeClick} > Ir
-            a
-            inicio < /Button>
-            < /div>
-        )
+                <div className={classes.noResultsContainer}>
+                    <Typography className={classes.noResultsText}>No existen resultados</Typography>
+                    <Button variant="contained" color="primary" onClick={handleGoToHomeClick}>Ir a inicio</Button>
+                </div>
+            )
         } else {
-            return
-        <
-            CircularProgress
-            size = {100}
-            color = "primary" / >
+            return <CircularProgress size={100} color="primary"/>
         }
     };
 
     return (
-        < Container >
-        {renderMovies()}
-        < /Container>
-)
+        <Container>
+            {renderMovies()}
+        </Container>
+    )
 }

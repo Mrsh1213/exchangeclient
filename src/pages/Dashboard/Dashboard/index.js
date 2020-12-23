@@ -5,10 +5,8 @@ Index.propTypes = {};
 
 function Index(props) {
     return (
-        < div > Dashboard
-    test < /div>
-)
-    ;
+        <div>Dashboard test</div>
+    );
 }
 
 export default Index;

@@ -2,11 +2,10 @@ import {
     CHANGE_LANG,
     CHANGE_THEME_TYPE
 } from '../../consts/actionTypes';
-import {get} from 'lodash';
 
 const initialState = {
     lang: "en",
-    themeType: "dark"
+    themeType: "light"
 };
 export default function (state = initialState, action) {
     switch (action.type) {

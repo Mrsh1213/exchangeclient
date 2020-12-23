@@ -38,6 +38,8 @@ const styles = makeStyles((theme) => {
         nameAppContainer: {
             textAlign: "left"
         },
+        ExcopsText: {},
+        ExchangeText: {},
         btnSubmit: {
             marginTop: 48,
             fontWeight: "bold"
@@ -48,171 +50,74 @@ const styles = makeStyles((theme) => {
 function Login(props) {
     const classes = styles();
     return (
-        < Grid
-    container
-    className = {classes.container}
-    justify = {"center"} >
-        < Grid
-    xs = {1}
-    sm = {3}
-    md = {4}
-    item / >
-    < Grid
-    justify = {"center"}
-    xs = {10}
-    sm = {6}
-    md = {4}
-    container
-    item >
-    < Grid
-    xs = {2}
-    item / >
-    < Grid
-    spacing = {2}
-    xs = {8}
-    alignItems = {"center"}
-    container
-    item >
-    < Grid
-    className = {classes.logo}
-    xs = {4}
-    item >
-    < img
-    width = {48}
-    height = {48}
-    alt = "logo-app"
-    src = "./images/logo.png" / >
-        < /Grid>
-        < Grid
-    className = {classes.nameAppContainer}
-    xs = {8}
-    item >
-    < div > < Typography
-    variant = {"caption"} > Excops < /Typography></
-    div >
-    < div > < Typography
-    variant = {"caption"} > Exchange
-    Center < /Typography></
-    div >
-    < /Grid>
-    < /Grid>
-    < Grid
-    xs = {2}
-    item / >
-    < /Grid>
-    < Grid
-    xs = {1}
-    sm = {3}
-    md = {4}
-    item / >
-    < Grid
-    container
-    xs = {12}
-    item >
-    < Grid
-    xs = {1}
-    sm = {3}
-    md = {4}
-    item / >
-    < Grid
-    xs = {10}
-    sm = {6}
-    md = {4}
-    item >
-    < Grid
-    className = {classes.cardHeader}
-    xs = {12}
-    item >
-    < Typography
-    variant = {"body2"} >
-        < span > Not
-    a
-    member ?
-<
-    /span>
-    < span > Sign
-    up
-    now
-    ! < /span>
-    < /Typography>
-    < /Grid>
-    < Card
-    square
-    className = {classes.card} >
-        < Grid
-    xs = {12}
-    item >
-    < Typography
-    className = {classes.h2}
-    variant = {"h2"} > Sign in < /Typography>
-        < Typography
-    className = {classes.h3}
-    variant = {"h3"} > to
-    access
-    your
-    account < /Typography>
-    < /Grid>
-    < Grid
-    xs = {12}
-    item >
-    < TextField
-    color = {"primary"}
-    label = {"PhoneNumber"}
-    value = {""}
-    fullWidth
-    required = {true}
-    onChange = {undefined}
-    margin = "normal"
-        / >
-        < /Grid>
-        < Grid
-    xs = {12}
-    item >
-    < TextField
-    label = {"Password"}
-    required = {true}
-    value = {""}
-    fullWidth
-    onChange = {undefined}
-    margin = "normal"
-        / >
-        < /Grid>
-        < Grid
-    xs = {12}
-    item >
-    < Button
-    className = {classes.btnSubmit}
-    fullWidth
-    variant = {"contained"}
-    color = {"primary"} > SignIn < /Button>
-        < /Grid>
-        < /Card>
-        < /Grid>
-        < Grid
-    xs = {1}
-    sm = {3}
-    md = {4}
-    item / >
-    < /Grid>
-    < Grid
-    xs = {12}
-    item >
-    < Typography
-    className = {classes.h3}
-    variant = {"h3"} > Contact
-    Us
-    At
-    Support
-@Exchange
-    If
-    You
-    Have
-    Problems < /Typography>
-    < /Grid>
+        <Grid container className={classes.container} justify={"center"}>
+            <Grid xs={1} sm={3} md={4} item/>
+            <Grid justify={"center"} xs={10} sm={6} md={4} container item>
+                <Grid xs={2} item/>
+                <Grid spacing={2} xs={8} alignItems={"center"} container item>
+                    <Grid className={classes.logo} xs={4} item>
+                        <img width={48} height={48} alt="logo-app" src="./images/logo.png"/>
+                    </Grid>
+                    <Grid className={classes.nameAppContainer} xs={8} item>
+                        <div><Typography color={"textSecondary"} className={classes.ExcopsText}
+                                         variant={"caption"}>Excops</Typography></div>
+                        <div><Typography color={"textPrimary"} className={classes.ExchangeText} variant={"caption"}>Exchange
+                            Center</Typography></div>
+                    </Grid>
+                </Grid>
+                <Grid xs={2} item/>
+            </Grid>
+            <Grid xs={1} sm={3} md={4} item/>
+            <Grid container xs={12} item>
+                <Grid xs={1} sm={3} md={4} item/>
+                <Grid xs={10} sm={6} md={4} item>
+                    <Grid className={classes.cardHeader} xs={12} item>
+                        <Typography variant={"body2"}>
+                            <span>Not a member? </span>
+                            <span>Sign up now!</span>
+                        </Typography>
+                    </Grid>
+                    <Card square className={classes.card}>
+                        <Grid xs={12} item>
+                            <Typography color={"textPrimary"} className={classes.h2} variant={"h2"}>Sign in</Typography>
+                            <Typography className={classes.h3} variant={"h3"}>to access your account</Typography>
+                        </Grid>
+                        <Grid xs={12} item>
+                            <TextField
+                                color={"primary"}
+                                label={"PhoneNumber"}
+                                value={""}
+                                fullWidth
+                                required={true}
+                                onChange={undefined}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid xs={12} item>
+                            <TextField
+                                label={"Password"}
+                                required={true}
+                                value={""}
+                                fullWidth
+                                onChange={undefined}
+                                margin="normal"
+                            />
+                        </Grid>
+                        <Grid xs={12} item>
+                            <Button className={classes.btnSubmit} fullWidth variant={"contained"}
+                                    color={"secondary"}>SignIn</Button>
+                        </Grid>
+                    </Card>
+                </Grid>
+                <Grid xs={1} sm={3} md={4} item/>
+            </Grid>
+            <Grid xs={12} item>
+                <Typography className={classes.h3} variant={"h3"}>Contact Us At Support@Exchange If You Have
+                    Problems</Typography>
+            </Grid>
 
-    < /Grid>
-)
-    ;
+        </Grid>
+    );
 }
 
 export default Login;

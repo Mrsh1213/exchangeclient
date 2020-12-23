@@ -5,9 +5,8 @@ Restore.propTypes = {};
 
 function Restore(props) {
     return (
-        < div > Restore < /div>
-)
-    ;
+        <div>Restore</div>
+    );
 }
 
 export default Restore;

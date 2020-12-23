@@ -5,9 +5,8 @@ Register.propTypes = {};
 
 function Register(props) {
     return (
-        < div > Register < /div>
-)
-    ;
+        <div>Register</div>
+    );
 }
 
 export default Register;
