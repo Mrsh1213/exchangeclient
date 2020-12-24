@@ -1,10 +1,9 @@
 import {createMuiTheme} from '@material-ui/core/styles'
-import {indigo} from '@material-ui/core/colors'
-import {faIR, enUS} from '@material-ui/core/locale'
+import {enUS, faIR} from '@material-ui/core/locale'
 
 const languages = {
-    "en": enUS,
-    "fa": faIR
+    "EN": enUS,
+    "FA": faIR
 };
 const theme = (type, lang) => {
     return createMuiTheme(
@@ -30,7 +29,7 @@ const theme = (type, lang) => {
                     light: "#ff1e8c",
                 },
                 primary: {
-                    main: "#ff1e8c",
+                    main: "#6c7983",
                     dark: "#6c7983",
                     light: "#524df6",
                     contrastText: "#fff"
@@ -71,10 +70,14 @@ const theme = (type, lang) => {
                         light: "#eaeaea",
                         dark: "#1d272e",
                     },
+                    5: {
+                        light: "#d5ebf9",
+                        dark: "#293843",
+                    },
 
                 }
             },
-            direction: lang === "fa" ? "rtl" : "ltr",
+            direction: lang === "FA" ? "rtl" : "ltr",
             overrides: {
                 // MuiSvgIcon: {
                 //     root: {color: "#c0c7d1"},

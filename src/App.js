@@ -28,9 +28,9 @@ const App = () => {
     return (
         <ThemeProvider theme={theme(themeType, lang)}>
             {/* <Button variant={"outlined"} color={"primary"} onClick={() => {
-                dispatch(changeLanguage({lang: lang === "en" ? "fa" : "en"}));
+                dispatch(changeLanguage({lang: lang === "EN" ? "FA" : "EN"}));
             }}>Change language {lang}</Button>*/}
-            {lang === "fa" ? <StylesProvider jss={jss}>
+            {lang === "FA" ? <StylesProvider jss={jss}>
                     <div id="subRoot" dir={"rtl"}>
                         <Router>
                             <Route exact path="/" component={Home}/>

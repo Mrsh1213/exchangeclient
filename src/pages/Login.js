@@ -1,7 +1,13 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import {Card, Grid, TextField, Typography} from "@material-ui/core";
 import {makeStyles} from '@material-ui/styles';
 import Button from "@material-ui/core/Button";
+import {Link, useHistory} from "react-router-dom";
+import {baseUrl} from "../consts/constans";
+import axios from "axios";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import {Visibility, VisibilityOff} from "@material-ui/icons";
+import IconButton from "@material-ui/core/IconButton";
 
 Login.propTypes = {};
 
@@ -38,10 +44,13 @@ const styles = makeStyles((theme) => {
         nameAppContainer: {
             textAlign: "left"
         },
-        ExcopsText: {},
-        ExchangeText: {},
         btnSubmit: {
+            textTransform: "none",
             marginTop: 48,
+            fontWeight: "bold"
+        },
+        link: {
+            color: "#fff",
             fontWeight: "bold"
         }
     })
@@ -49,6 +58,46 @@ const styles = makeStyles((theme) => {
 
 function Login(props) {
     const classes = styles();
+    const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const history = useHistory();
+
+    const handlePassword = useCallback((e) => {
+        setPassword(e.target.value)
+    }, [setPassword]);
+
+    const handleClickShowPassword = useCallback((e) => {
+        setShowPassword(prevState => !prevState)
+    }, [setShowPassword]);
+
+    const handlePhoneNumber = useCallback((e) => {
+        setPhoneNumber(e.target.value)
+    }, [setPhoneNumber]);
+
+    const handleSubmit = useCallback(() => {
+        if (phoneNumber && password) {
+            axios({
+                method: "Post",
+                url: `${baseUrl}/auth/login/`,
+                data: {
+                    "phone_number": phoneNumber,
+                    "password": password
+                },
+
+            }).then(res => {
+                if (res.status === 200) {
+                    localStorage.setItem("user", JSON.stringify(res.data.user));
+                    localStorage.setItem("token", res.data.token);
+                    history.push("/dashboard")
+                }
+                console.log(res);
+            }).catch(err => {
+                console.log(err);
+            })
+        }
+    }, [phoneNumber, password]);
+
     return (
         <Grid container className={classes.container} justify={"center"}>
             <Grid xs={1} sm={3} md={4} item/>
@@ -59,9 +108,9 @@ function Login(props) {
                         <img width={48} height={48} alt="logo-app" src="./images/logo.png"/>
                     </Grid>
                     <Grid className={classes.nameAppContainer} xs={8} item>
-                        <div><Typography color={"textSecondary"} className={classes.ExcopsText}
+                        <div><Typography color={"textSecondary"}
                                          variant={"caption"}>Excops</Typography></div>
-                        <div><Typography color={"textPrimary"} className={classes.ExchangeText} variant={"caption"}>Exchange
+                        <div><Typography color={"textPrimary"} variant={"caption"}>Exchange
                             Center</Typography></div>
                     </Grid>
                 </Grid>
@@ -74,7 +123,7 @@ function Login(props) {
                     <Grid className={classes.cardHeader} xs={12} item>
                         <Typography variant={"body2"}>
                             <span>Not a member? </span>
-                            <span>Sign up now!</span>
+                            <Link className={classes.link} to={"/register"}>Sign up now!</Link>
                         </Typography>
                     </Grid>
                     <Card square className={classes.card}>
@@ -86,10 +135,10 @@ function Login(props) {
                             <TextField
                                 color={"primary"}
                                 label={"PhoneNumber"}
-                                value={""}
+                                value={phoneNumber}
                                 fullWidth
                                 required={true}
-                                onChange={undefined}
+                                onChange={handlePhoneNumber}
                                 margin="normal"
                             />
                         </Grid>
@@ -97,14 +146,29 @@ function Login(props) {
                             <TextField
                                 label={"Password"}
                                 required={true}
-                                value={""}
+                                value={password}
                                 fullWidth
-                                onChange={undefined}
+                                type={showPassword ? "text" : "password"}
+                                InputProps={{
+                                    classes: {input: classes.inputBaseFullWidth},
+                                    endAdornment: <InputAdornment position="end">
+                                        <IconButton
+                                            size={"small"}
+                                            aria-label="toggle password visibility"
+                                            onClick={handleClickShowPassword}
+                                            edge="end"
+                                        >
+                                            {!showPassword ? <Visibility fontSize={"small"}/> :
+                                                <VisibilityOff fontSize={"small"}/>}
+                                        </IconButton>
+                                    </InputAdornment>
+                                }}
+                                onChange={handlePassword}
                                 margin="normal"
                             />
                         </Grid>
                         <Grid xs={12} item>
-                            <Button className={classes.btnSubmit} fullWidth variant={"contained"}
+                            <Button onClick={handleSubmit} className={classes.btnSubmit} fullWidth variant={"contained"}
                                     color={"secondary"}>SignIn</Button>
                         </Grid>
                     </Card>

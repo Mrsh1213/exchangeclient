@@ -4,8 +4,8 @@ import {
 } from '../../consts/actionTypes';
 
 const initialState = {
-    lang: "en",
-    themeType: "light"
+    lang: "EN",
+    themeType: "dark"
 };
 export default function (state = initialState, action) {
     switch (action.type) {

@@ -1,26 +1,54 @@
 import React from 'react';
-import {dashboardRouter} from '../../consts/router';
 import {Route} from 'react-router-dom';
+import MenuDrawer from "./MenuDrawer";
+import {dashboardRouter} from "../../consts/router";
+import {makeStyles} from "@material-ui/core/styles";
 
 
 DashboardRoute.propTypes = {};
+const useStyles = makeStyles((theme) => ({
+        root: {
+            display: 'flex',
+            height: "100%",
+        },
+        toolbar: {
+            ...theme.mixins.toolbar
+        },
+        content: {
+            height: "auto",
+            overflowY: "auto",
+            backgroundColor: theme.palette.color[5][theme.palette.type],
+            flexGrow: 1,
+            padding: 12,
+        },
+    }))
+;
 
 function DashboardRoute(props) {
+    const classes = useStyles();
     return (
-        dashboardRouter.map(route => {
-            if (route.component) {
-                return (<Route exact={route.exact} path={route.path} component={route.component}/>)
-            } else if (route.children) {
-                return (
-                    <Route exact={route.exact} path={route.path}>
-                        {route.children.map(routeChild => {
-                            return <Route exact={routeChild.exact} path={routeChild.path}
-                                          component={routeChild.component}/>
-                        })
+        <div className={classes.root}>
+            <MenuDrawer/>
+            <main className={classes.content}>
+                <div className={classes.toolbar}/>
+                {
+                    dashboardRouter.map(route => {
+                        if (route.component) {
+                            return (<Route exact={route.exact} path={route.path} component={route.component}/>)
+                        } else if (route.children) {
+                            return (
+                                <Route exact={route.exact} path={route.path}>
+                                    {route.children.map(routeChild => {
+                                        return <Route exact={routeChild.exact} path={routeChild.path}
+                                                      component={routeChild.component}/>
+                                    })
+                                    }
+                                </Route>)
                         }
-                    </Route>)
-            }
-        })
+                    })
+                }
+            </main>
+        </div>
     );
 }
 
