@@ -81,3 +81,7 @@
     background: #00a275;
     border-radius: 5px;
 }
+
+[contenteditable] {
+    outline: 0px solid transparent;
+}

@@ -48,7 +48,7 @@ const theme = (type, lang) => {
                 color: {
                     text1: {
                         light: "#151d24",
-                        dark: "#fff",
+                        dark: "#e8eaeb",
                     },
                     0: {
                         light: "#eaeaea",

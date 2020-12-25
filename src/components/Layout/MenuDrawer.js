@@ -189,7 +189,7 @@ function MenuDrawer(props) {
                                 </Grid>
                             </Hidden>
                             <Grid xs={9} md={12} item>
-                                <Typography color={"textSecondary"} variant="h6" noWrap>
+                                <Typography color={"textSecondary"} variant="h5" noWrap>
                                     {selectedMenu.title}
                                 </Typography>
                             </Grid>
