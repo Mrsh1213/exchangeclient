@@ -1,27 +1,26 @@
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
+import {dashboardRouter} from "../../consts/router";
+import {ExpandLess, ExpandMore} from "@material-ui/icons";
+import {Collapse} from "@material-ui/core";
+import {useHistory} from "react-router";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        display: 'flex',
-    },
     drawer: {
         [theme.breakpoints.up('sm')]: {
             width: drawerWidth,
@@ -46,12 +45,58 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         backgroundColor: theme.palette.color[0][theme.palette.type],
         width: drawerWidth,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
+    }
+
 }));
+const useStyleSubItem = makeStyles((theme) => ({
+    listItem: {
+        color: theme.palette.color[3][theme.palette.type],
+        paddingLeft: (ratio) => (theme.spacing(4) * ratio) * 0.5
+    },
+    listIconItem: {
+        color: theme.palette.color[3][theme.palette.type],
+        width: 18,
+        height: 18
+    }
+}));
+
+function ListItemBySubItem({route}) {
+    const [open, setOpen] = useState(false);
+    const history = useHistory();
+    const classes = useStyleSubItem(route.id.toString().length);
+
+
+    const handleClick = useCallback(() => {
+        if (route.component) {
+            history.push(route.path)
+        } else {
+            setOpen(prevState => !prevState);
+        }
+    }, [route]);
+    return (<>
+            <ListItem onClick={handleClick} className={classes.listItem}
+                      button key={route.title}>
+                <ListItemIcon>{<route.icon className={classes.listIconItem}/>}</ListItemIcon>
+                <ListItemText primary={route.title}/>
+                {route.children ? (open ? <ExpandLess/> : <ExpandMore/>) : null}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    {route.children && route.children.map(routeChild => {
+                        return (
+                            <ListItemBySubItem route={routeChild}/>
+                            // <ListItem onClick={handleClick} className={classes.listItem} button key={routeChild.title}>
+                            //     <ListItemIcon>{<route.icon className={classes.listIconItem}/>}</ListItemIcon>
+                            //     <ListItemText primary={routeChild.title}/>
+                            //     {routeChild.children ? (open ? <ExpandLess/> : <ExpandMore/>) : null}
+                            // </ListItem>
+                        );
+                    })}
+                </List>
+            </Collapse>
+        </>
+    )
+}
 
 function MenuDrawer(props) {
     const {windows} = props;
@@ -65,23 +110,13 @@ function MenuDrawer(props) {
 
     const drawer = (
         <div>
-            <div className={classes.toolbar}/>
+            <div className={classes.toolbar}>
+                logo
+            </div>
             <Divider/>
             <List>
-                {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
-                ))}
-            </List>
-            <Divider/>
-            <List>
-                {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}</ListItemIcon>
-                        <ListItemText primary={text}/>
-                    </ListItem>
+                {dashboardRouter.map((route, index) => (
+                    <ListItemBySubItem route={route}/>
                 ))}
             </List>
         </div>
