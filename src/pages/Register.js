@@ -7,9 +7,10 @@ import Button from "@material-ui/core/Button";
 import axios from "axios";
 import {baseUrl} from "../consts/constans";
 import {makeStyles} from "@material-ui/styles";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import {useSnackbar} from "notistack";
 
 Register.propTypes = {};
 
@@ -77,6 +78,9 @@ function Register(props) {
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [checkedTerms, setCheckedTerms] = useState(false);
+    const [errors, setErrors] = useState({});
+    const {enqueueSnackbar} = useSnackbar();
+    const history = useHistory();
 
     const handleEmail = useCallback((e) => {
         setEmail(e.target.value)
@@ -101,19 +105,40 @@ function Register(props) {
         if (phoneNumber && password && email && checkedTerms) {
             axios({
                 method: "Post",
-                url: `${baseUrl}/auth/register`,
+                url: `${baseUrl}/auth/register/`,
                 data: {
                     "phone_number": phoneNumber,
                     "email": email,
                     "password": password
                 }
             }).then(res => {
-                console.log(res);
+                if (res.status === 201) {
+                    setErrors({});
+                    /*
+                    * communication_lang: "EN"
+country: null
+date_joined: "2020-12-25T13:35:28.769372Z"
+email: "mrsh1213@gmail.com"
+first_name: null
+id: 6
+last_name: null
+phone_number: "09132038694"
+token: "231"
+                    * */
+                    localStorage.setItem("user", JSON.stringify(res.data));
+                    localStorage.setItem("token", res.data.token);
+                    history.push("/dashboard")
+                }
             }).catch(err => {
-                console.log(err);
+                setErrors(err.response.data)
             })
         } else {
-            //setError
+            enqueueSnackbar("Please enter fields", {
+                variant: "warning", anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }
+            });
         }
     }, [email, phoneNumber, password, checkedTerms]);
     return (
@@ -123,7 +148,7 @@ function Register(props) {
                 <Grid xs={2} item/>
                 <Grid spacing={2} xs={8} alignItems={"center"} container item>
                     <Grid className={classes.logo} xs={4} item>
-                        <img width={48} height={48} alt="logo-app" src="./images/logo.png"/>
+                        <img width={48} height={48} alt="logo-app" src="/images/logo.png"/>
                     </Grid>
                     <Grid className={classes.nameAppContainer} xs={8} item>
                         <div><Typography color={"textSecondary"}
@@ -151,6 +176,8 @@ function Register(props) {
                         </Grid>
                         <Grid xs={12} item>
                             <TextField
+                                error={errors.email}
+                                helperText={errors.email && errors.email.join(", ")}
                                 color={"primary"}
                                 label={"Email"}
                                 value={email}
@@ -162,6 +189,8 @@ function Register(props) {
                         </Grid>
                         <Grid xs={12} item>
                             <TextField
+                                error={errors.phone_number}
+                                helperText={errors.phone_number && errors.phone_number.join(", ")}
                                 color={"primary"}
                                 label={"PhoneNumber"}
                                 value={phoneNumber}
@@ -173,6 +202,8 @@ function Register(props) {
                         </Grid>
                         <Grid xs={12} item>
                             <TextField
+                                error={errors.password}
+                                helperText={errors.password && errors.password.join(", ")}
                                 label={"Password"}
                                 required={true}
                                 value={password}

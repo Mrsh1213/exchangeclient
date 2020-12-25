@@ -1,5 +1,5 @@
-import React from 'react';
-import {Route} from 'react-router-dom';
+import React, {useEffect} from 'react';
+import {Route, useHistory, withRouter} from 'react-router-dom';
 import MenuDrawer from "./MenuDrawer";
 import {dashboardRouter} from "../../consts/router";
 import {makeStyles} from "@material-ui/core/styles";
@@ -7,9 +7,9 @@ import {makeStyles} from "@material-ui/core/styles";
 
 DashboardRoute.propTypes = {};
 const useStyles = makeStyles((theme) => ({
-        root: {
-            display: 'flex',
-            height: "100%",
+    root: {
+        display: 'flex',
+        height: "100%",
         },
         toolbar: {
             ...theme.mixins.toolbar
@@ -26,6 +26,15 @@ const useStyles = makeStyles((theme) => ({
 
 function DashboardRoute(props) {
     const classes = useStyles();
+    const history = useHistory();
+
+    useEffect(() => {
+        if (!localStorage.getItem("user") && !localStorage.getItem("token")) {
+            localStorage.clear();
+            history.push("/login");
+        }
+    }, [props, history])
+
     return (
         <div className={classes.root}>
             <MenuDrawer/>
@@ -54,4 +63,4 @@ function DashboardRoute(props) {
     );
 }
 
-export default DashboardRoute;
+export default withRouter(DashboardRoute);

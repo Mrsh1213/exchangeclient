@@ -8,6 +8,7 @@ import axios from "axios";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import {Visibility, VisibilityOff} from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
+import {useSnackbar} from "notistack";
 
 Login.propTypes = {};
 
@@ -62,6 +63,7 @@ function Login(props) {
     const [showPassword, setShowPassword] = useState(false);
     const [phoneNumber, setPhoneNumber] = useState("");
     const history = useHistory();
+    const {enqueueSnackbar} = useSnackbar();
 
     const handlePassword = useCallback((e) => {
         setPassword(e.target.value)
@@ -91,10 +93,21 @@ function Login(props) {
                     localStorage.setItem("token", res.data.token);
                     history.push("/dashboard")
                 }
-                console.log(res);
             }).catch(err => {
-                console.log(err);
+                enqueueSnackbar(err.response.data.non_field_errors[0], {
+                    variant: "error", anchorOrigin: {
+                        vertical: 'bottom',
+                        horizontal: 'center',
+                    }
+                });
             })
+        } else {
+            enqueueSnackbar("Please enter fields", {
+                variant: "warning", anchorOrigin: {
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }
+            });
         }
     }, [phoneNumber, password]);
 
@@ -105,7 +118,7 @@ function Login(props) {
                 <Grid xs={2} item/>
                 <Grid spacing={2} xs={8} alignItems={"center"} container item>
                     <Grid className={classes.logo} xs={4} item>
-                        <img width={48} height={48} alt="logo-app" src="./images/logo.png"/>
+                        <img width={48} height={48} alt="logo-app" src="/images/logo.png"/>
                     </Grid>
                     <Grid className={classes.nameAppContainer} xs={8} item>
                         <div><Typography color={"textSecondary"}
