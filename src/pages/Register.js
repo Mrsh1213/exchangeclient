@@ -114,17 +114,6 @@ function Register(props) {
             }).then(res => {
                 if (res.status === 201) {
                     setErrors({});
-                    /*
-                    * communication_lang: "EN"
-country: null
-date_joined: "2020-12-25T13:35:28.769372Z"
-email: "mrsh1213@gmail.com"
-first_name: null
-id: 6
-last_name: null
-phone_number: "09132038694"
-token: "231"
-                    * */
                     localStorage.setItem("user", JSON.stringify(res.data));
                     localStorage.setItem("token", res.data.token);
                     history.push("/dashboard")

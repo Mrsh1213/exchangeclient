@@ -54,27 +54,27 @@ function Setting(props) {
             <Grid xs={12} item>
                 <ExCard Icon={MdPerson} title={"Personal Info"}>
                     <Grid spacing={1} container>
-                        <Grid xs={6} sm={3} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="first_name" label={"First Name"}
                                              value={personInfo.first_name}/>
                         </Grid>
-                        <Grid xs={6} sm={3} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="last_name" label={"Last Name"}
                                              value={personInfo.last_name}/>
                         </Grid>
-                        <Grid xs={6} sm={3} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="country" label={"Country"}
                                              value={personInfo.country}/>
                         </Grid>
-                        <Grid xs={6} sm={3} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="password" label={"Password"}
                                              value={"••••••••"}/>
                         </Grid>
-                        <Grid xs={6} sm={3} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="phone_number" label={"PhoneNumber"}
                                              value={personInfo.phone_number}/>
                         </Grid>
-                        <Grid xs={12} sm={9} item>
+                        <Grid xs={12} sm={6} item>
                             <ToggleTextField handleEditValue={handleEditValue} name="email" label={"Email"}
                                              value={personInfo.email}/>
                         </Grid>

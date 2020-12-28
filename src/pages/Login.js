@@ -184,6 +184,11 @@ function Login(props) {
                             <Button onClick={handleSubmit} className={classes.btnSubmit} fullWidth variant={"contained"}
                                     color={"secondary"}>SignIn</Button>
                         </Grid>
+                        <Grid xs={12} item> </Grid>
+                        <Grid xs={12} item>
+                            <Typography component={Link} to={"/restore"} color={"textSecondary"} variant={"caption"}>Forgot
+                                your password?</Typography>
+                        </Grid>
                     </Card>
                 </Grid>
                 <Grid xs={1} sm={3} md={4} item/>

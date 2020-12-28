@@ -25,10 +25,16 @@ export default ({history}) => {
     const handleSearchClick = event => {
         history.push(`/results?movieName=${searchText}`);
     };
+    const handleRouteLogin = event => {
+        history.push(`/login`);
+    };
 
     const classes = styles();
 
-    return ("Home"
+    return (<div style={{textAlign: "center", padding: 60}}>
+            <h4>Landing Page...</h4>
+            <Button onClick={handleRouteLogin} variant={"outlined"} color={"secondary"}>Login</Button>
+        </div>
         /*<Container className={classes.container}>
           <Card className={classes.cardContainer}>
             <Grid container className={classes.titleGridContainer}>

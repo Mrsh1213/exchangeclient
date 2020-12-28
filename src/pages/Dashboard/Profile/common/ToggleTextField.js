@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import {FaCheck, FaEdit} from "react-icons/fa";
 import IconButton from "@material-ui/core/IconButton";
 import {useTheme} from '@material-ui/core/styles';
+import {MdCancel} from "react-icons/md";
+import clsx from "clsx";
 
 
 ToggleTextField.propTypes = {};
@@ -18,10 +20,25 @@ const styles = makeStyles((theme) => {
             fontWeight: 500,
             color: theme.palette.color[3][theme.palette.type],
         },
-        icon: {
+        iconDone: {
+            color: theme.palette.text.secondary,
             width: 12,
-            height: 12,
-            marginLeft: 5
+            height: 12
+        },
+        iconEdit: {
+            width: 12,
+            height: 12
+        },
+        iconCancel: {
+            color: theme.palette.error[theme.palette.type],
+            width: 12,
+            height: 12
+        },
+        editModeStyle: {
+            border: "solid 1px",
+            minWidth: 100,
+            padding: 2,
+            borderColor: theme.palette.color["text1"][theme.palette.type],
         }
     })
 });
@@ -37,7 +54,11 @@ function ToggleTextField(props) {
         setValueText(value);
     }, [value])
     const handleEditMode = () => {
-        setEditMode(prevState => !prevState)
+        setEditMode(true)
+    };
+    const handleCancelEditMode = () => {
+        setValueText(value)
+        setEditMode(false);
     };
     const handleBlurValue = (e) => {
         setValueText(e.target.innerText)
@@ -46,20 +67,22 @@ function ToggleTextField(props) {
         handleEditValue(valueText, name);
         setEditMode(false);
     }, [handleEditValue, valueText, name]);
+
     return (
         <div>
             <Typography className={classes.label}>{label}</Typography>
             <div style={{display: "flex", alignItems: "center"}}>
-                <Typography onBlur={handleBlurValue} style={editMode ? {
-                    border: "solid 1px",
-                    padding: 2,
-                    borderColor: theme.palette.color["text1"][theme.palette.type],
-                } : undefined} contentEditable={editMode} className={classes.value}>{valueText}</Typography>
-                {editMode ? <IconButton onClick={handleEditValueInternal} size={"small"}>
-                        <FaCheck className={classes.icon}/>
-                    </IconButton> :
+                <Typography onBlur={handleBlurValue} contentEditable={editMode}
+                            className={editMode ? clsx(classes.editModeStyle, classes.value) : classes.value}>{valueText}</Typography>
+                {editMode ? <span>
+                        <IconButton onClick={handleEditValueInternal} size={"small"}>
+                        <FaCheck className={classes.iconDone}/>
+                    </IconButton>
+                        <IconButton onClick={handleCancelEditMode} size={"small"}>
+                        <MdCancel className={classes.iconCancel}/>
+                    </IconButton></span> :
                     <IconButton onClick={handleEditMode} size={"small"}>
-                        <FaEdit className={classes.icon}/>
+                        <FaEdit className={classes.iconEdit}/>
                     </IconButton>
                 }
             </div>

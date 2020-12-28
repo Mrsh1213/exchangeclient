@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import Card from "@material-ui/core/Card";
 import PropTypes from "prop-types";
 import moment from "moment";
@@ -12,6 +12,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import {baseUrl, urlServer} from "../../../../consts/constans";
 import API from "../../../../consts/API";
 import {arrayBufferToBase64, base64Encode} from "../../../../consts/Helper";
+import Dialog from "@material-ui/core/Dialog";
 
 DocumentCard.propTypes = {
     doc: PropTypes.object
@@ -53,6 +54,8 @@ user
 function DocumentCard(props) {
     const classes = styles();
     const {status, title, created_at, document, reason} = props.doc;
+    const [dialogShowDocument, setDialogShowDocument] = useState(false);
+    const file = document.split("/");
 
     function Status({status, reason}) {
         switch (status) {
@@ -70,43 +73,39 @@ function DocumentCard(props) {
     }
 
     const showDocument = useCallback(() => {
-        //
-        let doc = document.split("/");
-        console.log(doc);
-        API({url: `/media/protected/documents/${doc[doc.length - 1]}`, method: "GET"}).then(res => {
-            let reader = new FileReader();
-            reader.onload = function (event) {
-                let data = event.target.result;
-                console.log(arrayBufferToBase64(data));
-            };
-            console.log(base64Encode(res.data));
-            reader.readAsArrayBuffer(new Blob(res.data));
-        })
-    }, [document]);
+        setDialogShowDocument(prevState => !prevState)
+    }, []);
 
     return (
-        <Card className={classes.card}>
-            <Grid container>
-                <Grid justify={"center"} alignItems={"center"} container xs={12} item>
-                    <Grid xs={4} item><Typography className={classes.valueField}>{title}</Typography></Grid>
-                    <Grid xs={3} item><Typography
-                        className={classes.valueField}>{moment(new Date(created_at)).format("YYYY/MM/DD HH:mm")}</Typography></Grid>
-                    <Grid xs={3} style={{textAlign: "center"}} item><Typography
-                        className={classes.valueFieldvalueField}><Status reason={reason} status={status}/></Typography></Grid>
-                    <Grid xs={2} style={{textAlign: "center"}} item><IconButton onClick={showDocument}
-                                                                                size="small"><FaEye
-                        className={classes.icon}/></IconButton></Grid>
-                </Grid>
-                <Grid justify={"center"} container xs={12} item>
-                    <Grid xs={4} item><Typography className={classes.titleField}>Document Type</Typography></Grid>
-                    <Grid xs={3} item><Typography className={classes.titleField}>Date of create</Typography></Grid>
-                    <Grid xs={3} style={{textAlign: "center"}} item><Typography
-                        className={classes.titleField}>{status}</Typography></Grid>
-                    <Grid xs={2} item/>
-                </Grid>
+        <>
+            <Dialog maxWidth={"sm"} onClose={showDocument} open={dialogShowDocument}>
+                <img width={"300x"} height={"300px"} alt={"doc"}
+                     src={urlServer + `/media/protected/documents/${file[file.length - 1]}/?token=${localStorage.getItem("token")}`}/>
+            </Dialog>
+            <Card className={classes.card}>
+                <Grid container>
+                    <Grid justify={"center"} alignItems={"center"} container xs={12} item>
+                        <Grid xs={4} item><Typography className={classes.valueField}>{title}</Typography></Grid>
+                        <Grid xs={3} item><Typography
+                            className={classes.valueField}>{moment(new Date(created_at)).format("YYYY/MM/DD HH:mm")}</Typography></Grid>
+                        <Grid xs={3} style={{textAlign: "center"}} item><Typography
+                            className={classes.valueFieldvalueField}><Status reason={reason}
+                                                                             status={status}/></Typography></Grid>
+                        <Grid xs={2} style={{textAlign: "center"}} item><IconButton onClick={showDocument}
+                                                                                    size="small"><FaEye
+                            className={classes.icon}/></IconButton></Grid>
+                    </Grid>
+                    <Grid justify={"center"} container xs={12} item>
+                        <Grid xs={4} item><Typography className={classes.titleField}>Document Type</Typography></Grid>
+                        <Grid xs={3} item><Typography className={classes.titleField}>Date of create</Typography></Grid>
+                        <Grid xs={3} style={{textAlign: "center"}} item><Typography
+                            className={classes.titleField}>{status}</Typography></Grid>
+                        <Grid xs={2} item/>
+                    </Grid>
 
-            </Grid>
-        </Card>
+                </Grid>
+            </Card>
+        </>
     );
 }
 
