@@ -1,6 +1,7 @@
 import {Dashboard, Profile} from "../pages/Dashboard"
 import {FaWallet} from "react-icons/fa";
 import {FiRefreshCcw} from "react-icons/fi";
+import {GoVerified} from "react-icons/go";
 import {MdDashboard, MdPerson, MdSettings, MdTransform} from "react-icons/md";
 
 export const dashboardRouter = [
@@ -47,6 +48,12 @@ export const dashboardRouter = [
                 icon: MdSettings,
                 path: "/dashboard/profile/setting",
                 component: Profile.Setting,
+            }, {
+                id: 51,
+                title: "Verification",
+                icon: GoVerified,
+                path: "/dashboard/profile/verification",
+                component: Profile.Verification,
             }
         ]
     }

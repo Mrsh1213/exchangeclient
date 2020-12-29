@@ -26,7 +26,7 @@ const App = () => {
     return (
         <ThemeProvider theme={theme(themeType, lang)}>
             <SnackbarProvider
-                autoHideDuration={1500}
+                autoHideDuration={2000}
                 // className="animate__bounceIn  animate__animated"
                 maxSnack={5}>
                 {lang === "FA" ? <StylesProvider jss={jss}>

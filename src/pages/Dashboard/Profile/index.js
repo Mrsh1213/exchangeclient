@@ -1,3 +1,4 @@
 import Setting from './Setting';
+import Verification from './Verification';
 
-export {Setting}
+export {Setting, Verification}

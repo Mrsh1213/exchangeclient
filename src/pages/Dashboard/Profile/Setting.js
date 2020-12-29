@@ -35,7 +35,7 @@ function Setting(props) {
     useEffect(() => {
         handleGetPersonInfo();
         handleGetDocuments();
-    }, [handleGetPersonInfo]);
+    }, [handleGetPersonInfo, handleGetDocuments]);
 
     const handleEditValue = useCallback((value, name) => {
         API({
@@ -86,7 +86,7 @@ function Setting(props) {
                     <Grid spacing={1} container>
                         {documents.map((doc) => (
                                 <Grid key={doc.id} xs={12} item>
-                                    <DocumentCard doc={doc}/>
+                                    <DocumentCard reloadData={handleGetDocuments} doc={doc}/>
                                 </Grid>
                             )
                         )}
