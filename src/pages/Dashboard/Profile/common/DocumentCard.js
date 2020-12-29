@@ -62,20 +62,21 @@ function DocumentCard(props) {
                         <Tooltip placement={"top"} title={reason} aria-label="reason"><IconButton
                             size={"small"}><MdCancel
                             style={{color: "red"}}/></IconButton></Tooltip>
-                           <input
-                               onChange={handleReUpload}
-                               accept="*/*"
-                               style={{display: 'none'}}
-                               id={title}
-                               name={title}
-                               multiple
-                               type="file"
-                           />
-                           <label htmlFor={title}>
-                               <IconButton component={"span"} size="small">
-                                   <FaCloudUploadAlt className={classes.icon}/>
-                               </IconButton>
-                           </label>
+                        {reloadData && <><input
+                            onChange={handleReUpload}
+                            accept="*/*"
+                            style={{display: 'none'}}
+                            id={title}
+                            name={title}
+                            multiple
+                            type="file"
+                        />
+                            <label htmlFor={title}>
+                                <IconButton component={"span"} size="small">
+                                    <FaCloudUploadAlt className={classes.icon}/>
+                                </IconButton>
+                            </label>
+                        </>}
                     </span>
 
                 );
