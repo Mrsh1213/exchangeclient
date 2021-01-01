@@ -74,6 +74,10 @@ const theme = (type, lang) => {
                         light: "#d5ebf9",
                         dark: "#293843",
                     },
+                    "selected": {
+                        light: "#d5ebf9",
+                        dark: "#3a4852",
+                    },
 
                 }
             },
