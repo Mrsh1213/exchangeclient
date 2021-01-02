@@ -95,7 +95,6 @@ export default class ExTimer extends React.Component {
     }
 
     countDown() {
-        // Remove one second, set state so a re-render happens.
         let seconds = this.state.seconds - 1;
         this.setState({
             time: this.secondsToTime(seconds),
