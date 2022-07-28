@@ -31,7 +31,7 @@ const App = () => {
                 maxSnack={5}>
                 {lang === "FA" ? <StylesProvider jss={jss}>
                         <div id="subRoot" dir={"rtl"}>
-                            <Router>
+                            <Router basename={'/exchange'}>
                                 <Route exact path="/" component={Home}/>
                                 <Route path="/results" component={Results}/>
                                 <Route path="/movie/:movieId" component={MovieDetail}/>
@@ -42,7 +42,7 @@ const App = () => {
                             </Router>
                         </div>
                     </StylesProvider> :
-                    <Router>
+                    <Router basename={'/exchange'}>
                         <Route exact path="/" component={Home}/>
                         <Route path="/results" component={Results}/>
                         <Route path="/movie/:movieId" component={MovieDetail}/>

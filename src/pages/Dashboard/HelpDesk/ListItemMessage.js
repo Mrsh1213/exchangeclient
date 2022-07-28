@@ -73,7 +73,8 @@ function ListItemMessage(props) {
             <Grid className={selected ? classes.containerSelected : classes.container}
                   spacing={1}
                   alignItems={"center"}
-                  xs={6}
+                  md={6}
+                  xs={10}
                   item
                   container>
                 <Grid xs={12} item>

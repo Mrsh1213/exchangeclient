@@ -79,28 +79,28 @@ function Login(props) {
 
     const handleSubmit = useCallback(() => {
         if (phoneNumber && password) {
-            axios({
-                method: "Post",
-                url: `${baseUrl}/auth/login/`,
-                data: {
-                    "phone_number": phoneNumber,
-                    "password": password
-                },
-
-            }).then(res => {
-                if (res.status === 200) {
-                    localStorage.setItem("user", JSON.stringify(res.data.user));
-                    localStorage.setItem("token", res.data.token);
+            // axios({
+            //     method: "Post",
+            //     url: `${baseUrl}/auth/login/`,
+            //     data: {
+            //         "phone_number": phoneNumber,
+            //         "password": password
+            //     },
+            //
+            // }).then(res => {
+            //     if (res.status === 200) {
+            //         localStorage.setItem("user", JSON.stringify(res.data.user));
+            //         localStorage.setItem("token", res.data.token);
                     history.push("/dashboard")
-                }
-            }).catch(err => {
-                enqueueSnackbar(err.response.data.non_field_errors[0], {
-                    variant: "error", anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'center',
-                    }
-                });
-            })
+            //     }
+            // }).catch(err => {
+            //     enqueueSnackbar(err.response.data.non_field_errors[0], {
+            //         variant: "error", anchorOrigin: {
+            //             vertical: 'bottom',
+            //             horizontal: 'center',
+            //         }
+            //     });
+            // })
         } else {
             enqueueSnackbar("Please enter fields", {
                 variant: "warning", anchorOrigin: {

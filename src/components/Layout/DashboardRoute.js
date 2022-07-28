@@ -28,12 +28,12 @@ function DashboardRoute(props) {
     const classes = useStyles();
     const history = useHistory();
 
-    useEffect(() => {
-        if (!localStorage.getItem("user") && !localStorage.getItem("token")) {
-            localStorage.clear();
-            history.push("/login");
-        }
-    }, [props, history])
+    // useEffect(() => {
+    //     if (!localStorage.getItem("user") && !localStorage.getItem("token")) {
+    //         localStorage.clear();
+    //         history.push("/login");
+    //     }
+    // }, [props, history])
 
     return (
         <div className={classes.root}>
